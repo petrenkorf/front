@@ -1,8 +1,0 @@
-export default [
-  {
-    rules: {
-      "prefer-const": "error",
-      "react/prop-types": "off"
-    }
-  }
-]
