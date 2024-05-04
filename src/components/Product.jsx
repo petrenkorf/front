@@ -1,3 +1,11 @@
+import PropTypes from 'prop-types'
+
+Product.propTypes = {
+  name: PropTypes.string,
+  description: PropTypes.string,
+  price: PropTypes.bigint
+}
+
 const Product = ({ name, description, price }) => {
   return (
     <div className="rounded-md m-6 bg-white border-2 border-gray-200 w-[400px] h-[500px] transition-all shadow-xl inline-block hover:shadow-2xl">
