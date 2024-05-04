@@ -25,6 +25,7 @@ jobs:
         with:
           node-version: '21.6.0'
           cache: 'npm'
+      - run: npm install
       - run: npm run test-ci
   # Cucumber:
   #   name: integration-test
