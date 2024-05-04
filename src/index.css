@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+input[type="text"], textarea {
+  @apply w-full border border-gray-200 h-8 mb-2;
+}
+
+input[type="submit"] {
+  @apply bg-blue-400 px-4 py-2 text-white rounded-md cursor-pointer;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
