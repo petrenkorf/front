@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { useState } from "react";
 import { animate, spring } from 'motion';
 import './App.css';
 import Product from './components/Product';
@@ -31,7 +31,7 @@ const NewProductButton = () => {
 function App() {
   const [menu_open, set_menu_open] = useState(false);
     
-  const handleClick = (_) => {
+  const handleClick = () => {
     animate(".popup", OPTIONS_MENU_ANIMATION[+ menu_open], ANIMATION_CONFIG);
     set_menu_open(!menu_open);
   }
