@@ -12,6 +12,7 @@ jobs:
         with:
           node-version: '21.6.0'
           cache: 'npm'
+      - run: npm install
       - run: npm run lint
   Jest:
     name: unit-test
