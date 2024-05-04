@@ -19,11 +19,11 @@ jobs:
       - name: Cache node_modules
         uses: actions/cache@v4
         with: 
-          path: |
-            node_modules
-          key: ${{ hashFiles('package-lock.json')}}
+          path: node_modules
+          key: ${{ hashFiles('package-lock.json')}}-lock
 
       - run: npm run lint
+
   Jest:
     name: unit-test
     needs: linter
