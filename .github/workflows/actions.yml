@@ -8,11 +8,21 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: '21.6.0'
           cache: 'npm'
+
       - run: npm install
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with: 
+          path: |
+            node_modules
+          key: ${{ hashFiles('package-lock.json')}}
+
       - run: npm run lint
   Jest:
     name: unit-test
