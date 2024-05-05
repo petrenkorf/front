@@ -12,6 +12,7 @@
     "test-ci": "vitest run"
   },
   "dependencies": {
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "motion": "^10.17.0",
     "prop-types": "^15.8.1",
