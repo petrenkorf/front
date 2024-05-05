@@ -28,6 +28,12 @@ const NewProductButton = () => {
   )
 }
 
+const product = {
+  name: 'Product',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla scelerisque vehicula cursus. Duis in tortor sit amet purus ornare placerat. Mauris vitae enim at diam dapibus vulputate. Sed ut gravida purus, ut lobortis dolor. Nulla molestie ex a quam semper, nec semper urna vulputate. Pellentesque vehicula dapibus nisi, eget fermentum purus commodo nec. Phasellus elementum, justo at pharetra rutrum, lectus arcu aliquam risus, aliquet tristique purus libero ac est.',
+  price: 2900
+};
+
 function App() {
   const [menu_open, set_menu_open] = useState(false);
     
@@ -35,12 +41,6 @@ function App() {
     animate(".popup", OPTIONS_MENU_ANIMATION[+ menu_open], ANIMATION_CONFIG);
     set_menu_open(!menu_open);
   }
-
-  const props = {
-    name: 'Product',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla scelerisque vehicula cursus. Duis in tortor sit amet purus ornare placerat. Mauris vitae enim at diam dapibus vulputate. Sed ut gravida purus, ut lobortis dolor. Nulla molestie ex a quam semper, nec semper urna vulputate. Pellentesque vehicula dapibus nisi, eget fermentum purus commodo nec. Phasellus elementum, justo at pharetra rutrum, lectus arcu aliquam risus, aliquet tristique purus libero ac est.',
-    price: 2900
-  };
 
   return (
     <div className="App bg-gray-100 h-screen">
@@ -50,9 +50,6 @@ function App() {
         className="bg-blue-300 p-4 cursor-pointer">Open Popup</button>
       <div className="m-auto popup border-2 border-gray-200 shadow-xl w-[300px] p-5 bg-white opacity-0">pop up</div>
       <NewProductButton></NewProductButton>
-      <Product {...props}></Product>
-      <Product {...props}></Product>
-      <Product {...props}></Product>
     </div>
   );
 }
