@@ -15,15 +15,54 @@ const OPTIONS_MENU_ANIMATION = [{
   opacity: 0
 }]
 
+const CREATE_PRODUCT_FORM_ANIMATION = [{
+  opacity: 1,
+  left: '105%'
+}, {
+  opacity: 0,
+  left: '0px'
+}]
+
+const FORM_ANIMATION_CONFIG =  { easing: spring({ 
+  stiffness: 150,
+}) }
+
 const ANIMATION_CONFIG =  { easing: spring({ 
   stiffness: 400,
 }) }
 
 const NewProductButton = () => {
+  const [open, setOpen] = useState(false)
+
+  let form = (open) ? <NewProductForm /> : null
+
+  const closeForm = () => {
+    animate("#new-product", CREATE_PRODUCT_FORM_ANIMATION[+ open], FORM_ANIMATION_CONFIG).finished.then(() => {
+      setOpen(!open)
+    });
+  }
+
+  const openForm = () => {
+    setOpen(!open)
+    setTimeout(() => {
+      animate("#new-product", CREATE_PRODUCT_FORM_ANIMATION[+ open], FORM_ANIMATION_CONFIG)
+    },10)
+  }
+
+  const clickHandler = () => {
+    if (open) {
+      closeForm()
+    } else {
+      openForm()
+    }
+  }
+
   return (
-    <div className="relative cursor-pointer align-top rounded-md m-6 bg-blue-300 border-2 border-blue-400 w-[400px] h-[500px] transition-all shadow-xl shadow-blue-300 inline-block hover:shadow-2xl hover:shadow-blue-400">
-      <p className="text-blue-600 font-extrabold">+</p>
-      <NewProductForm />
+    <div 
+      onClick={clickHandler}
+      className="relative cursor-pointer align-top rounded-md m-6 bg-blue-300 border-2 border-blue-400 w-[400px] h-[500px] transition-all shadow-xl shadow-blue-300 inline-block hover:shadow-2xl hover:shadow-blue-400">
+      <p className="text-white font-extrabold">Create Product</p>
+      { form }
     </div>
   )
 }
@@ -50,6 +89,7 @@ function App() {
         className="bg-blue-300 p-4 cursor-pointer">Open Popup</button>
       <div className="m-auto popup border-2 border-gray-200 shadow-xl w-[300px] p-5 bg-white opacity-0">pop up</div>
       <NewProductButton></NewProductButton>
+      <span>Loading</span>
     </div>
   );
 }

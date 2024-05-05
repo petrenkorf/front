@@ -1,6 +1,6 @@
 const NewProductForm = () => {
   return (
-    <div id="new-product" className="absolute bg-white border-2 border-gray-200 w-full h-full left-full top-0">
+    <div id="new-product" className="opacity-0 absolute bg-white border-2 border-gray-200 w-full h-full left-0 top-0">
       <h2 className="text-2xl p-4">New Product</h2>
       <form className="p-4">
         <label>
