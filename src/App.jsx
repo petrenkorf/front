@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { animate, spring } from 'motion';
 import './App.css';
 import Product from './components/Product';
@@ -32,7 +32,7 @@ const NewProductButton = () => {
     setOpen(!open)
     setTimeout(() => {
       animate("#new-product", CREATE_PRODUCT_FORM_ANIMATION[+ open], FORM_ANIMATION_CONFIG)
-    },10)
+    }, 50)
   }
 
   const clickHandler = () => {
@@ -60,11 +60,29 @@ const product = {
 };
 
 function App() {
+  const [products, setProducts] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('http://localhost:3000/products')
+      const data = await response.json()
+
+      setIsLoading(false)
+      setProducts(data.products)
+    }
+
+    fetchData()
+  }, [])
+
+  const loading = (isLoading) ? (<span>Loading</span>) : null
+
   return (
     <div className="App bg-gray-100 h-screen">
       <h1 className="text-3xl font-bold underline">Welcome</h1>
       <NewProductButton></NewProductButton>
-      <span>Loading</span>
+      { loading }
+      { products.map((product, key) => (<Product key={key} {...product} />))}
     </div>
   );
 }
