@@ -26,7 +26,8 @@ const NewProductForm = () => {
             data-testid="price-input"/>
         </label>
 
-        <input type="submit" value="Create" />
+        <button aria-label="cancel">Cancel</button>
+        <input aria-label="create" type="submit" value="Create" />
       </form> 
     </div>
   )

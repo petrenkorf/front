@@ -35,8 +35,15 @@ describe('NewProductForm', () => {
     expect(screen.getByText('Price')).toBeInTheDocument()
   })
 
+  it('has a cancel button with value cancel', () => {
+    const btn = screen.getByRole('button', {name: /cancel/i}) 
+
+    expect(btn).toBeInTheDocument()
+    expect(btn).toHaveTextContent("Cancel")
+  })
+
   it('has a submit button with value Create', () => {
-    const btn = screen.getByRole('button') 
+    const btn = screen.getByRole('button', {name: /create/i}) 
 
     expect(btn).toBeInTheDocument()
     expect(btn.value).toBe("Create")
