@@ -4,17 +4,6 @@ import './App.css';
 import Product from './components/Product';
 import NewProductForm from './components/NewProductForm';
 
-
-const OPTIONS_MENU_ANIMATION = [{
-  width: '400px',
-  height: '80px',
-  opacity: 1
-}, {
-  width: '300px',
-  height: '68px',
-  opacity: 0
-}]
-
 const CREATE_PRODUCT_FORM_ANIMATION = [{
   opacity: 1,
   left: '105%'
@@ -24,11 +13,8 @@ const CREATE_PRODUCT_FORM_ANIMATION = [{
 }]
 
 const FORM_ANIMATION_CONFIG =  { easing: spring({ 
-  stiffness: 150,
-}) }
-
-const ANIMATION_CONFIG =  { easing: spring({ 
-  stiffness: 400,
+  stiffness: 200,
+  damping: 15
 }) }
 
 const NewProductButton = () => {
@@ -74,20 +60,9 @@ const product = {
 };
 
 function App() {
-  const [menu_open, set_menu_open] = useState(false);
-    
-  const handleClick = () => {
-    animate(".popup", OPTIONS_MENU_ANIMATION[+ menu_open], ANIMATION_CONFIG);
-    set_menu_open(!menu_open);
-  }
-
   return (
     <div className="App bg-gray-100 h-screen">
       <h1 className="text-3xl font-bold underline">Welcome</h1>
-      <button 
-        onClick={handleClick}
-        className="bg-blue-300 p-4 cursor-pointer">Open Popup</button>
-      <div className="m-auto popup border-2 border-gray-200 shadow-xl w-[300px] p-5 bg-white opacity-0">pop up</div>
       <NewProductButton></NewProductButton>
       <span>Loading</span>
     </div>

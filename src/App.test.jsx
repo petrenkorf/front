@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitForElementToBeRemoved } from '@testing-library/react'
 import App from './App'
 
 describe('App', () => {
@@ -17,6 +17,12 @@ describe('App', () => {
 
   it('Should display message Loading', () => {
     expect(screen.getByText(/Loading/i)).toBeInTheDocument()
+  })
+
+  it('Should remove loading message after load products', async () => {
+    await waitForElementToBeRemoved(() => screen.getByText(/Loading/i))
+
+    expect(screen.queryByText(/Loading/i)).not.toBeInTheDocument()
   })
 
   it('New product form should not be visible', () => {
