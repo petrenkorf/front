@@ -4,8 +4,21 @@ import { cleanup, render, screen, fireEvent, waitForElementToBeRemoved } from '@
 import App from './App'
 
 
+vi.mock('fetch')
+
+const mockedImplementation = () => Promise.resolve({
+  json() {
+    return { products: [] }
+  }
+})
+
+global.fetch = vi.fn(mockedImplementation)
 
 describe('App', () => {
+  afterEach(() => {
+    cleanup()
+  })
+
   it('Welcomes the user', () => {
     render(<App />)
     expect(screen.getByText(/Welcome/i)).toHaveTextContent('Welcome')
@@ -22,14 +35,6 @@ describe('App', () => {
   })
 
   it('Should remove loading message after load products', async () => {
-    const mockedImplementation = () => Promise.resolve({
-      json() {
-        return { products: [] }
-      }
-    })
-
-    global.fetch = vi.fn(mockedImplementation)
-
     render(<App />)
     await waitForElementToBeRemoved(() => screen.getByText(/Loading/i))
 
