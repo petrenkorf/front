@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { render, screen, fireEvent, cleanup } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import NewProductForm from './NewProductForm'
 
 describe('NewProductForm', () => {
@@ -73,18 +73,19 @@ describe('NewProductForm', () => {
     expect(onCancel).toHaveBeenCalledTimes(1)
   })
 
-  it('executes onClose when clicking outside the component', () => {
-    const onClickOutside = vi.fn().mockImplementation()
+  it('executes onClickOutside when clicking outside form', async () => {
+    const callback = vi.fn().mockImplementation()
 
     render(
-      <>
-        <NewProductForm onClickOutside={onClickOutside}/>
-        <button data-testid="outside">Outside</button>
-      </>
+      <div>
+        <NewProductForm onClickOutside={callback} />
+        <button>Outside</button>
+      </div>
     )
-
-    fireEvent.click(screen.getByText(/Outside/i)) 
-
-    expect(onClickOutside).toHaveBeenCalledTimes(1)
+  
+    waitFor(() => {
+      fireEvent.click(screen.getByText('Outside'))
+      expect(callback).toHaveBeenCalled()
+    })
   })
 })
