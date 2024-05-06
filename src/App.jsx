@@ -20,8 +20,6 @@ const FORM_ANIMATION_CONFIG =  { easing: spring({
 const NewProductButton = () => {
   const [open, setOpen] = useState(false)
 
-  let form = (open) ? <NewProductForm /> : null
-
   const closeForm = () => {
     animate("#new-product", CREATE_PRODUCT_FORM_ANIMATION[+ open], FORM_ANIMATION_CONFIG).finished.then(() => {
       setOpen(!open)
@@ -43,21 +41,19 @@ const NewProductButton = () => {
     }
   }
 
+  let form = (open) ? <NewProductForm onClickOutside={closeForm} onCancel={closeForm}/> : null
+
   return (
-    <div 
-      onClick={clickHandler}
-      className="relative cursor-pointer align-top rounded-md m-6 bg-blue-300 border-2 border-blue-400 w-[400px] h-[500px] transition-all shadow-xl shadow-blue-300 inline-block hover:shadow-2xl hover:shadow-blue-400">
-      <p className="text-white font-extrabold">Create Product</p>
+    <div className="relative w-[400px] h-[500px]">
+      <div 
+        onClick={clickHandler}
+        className="relative cursor-pointer align-top rounded-md m-6 bg-blue-300 border-2 border-blue-400 w-[400px] h-[500px] transition-all shadow-xl shadow-blue-300 inline-block hover:shadow-2xl hover:shadow-blue-400">
+        <p className="text-white font-extrabold">Create Product</p>
+      </div>
       { form }
     </div>
   )
 }
-
-const product = {
-  name: 'Product',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla scelerisque vehicula cursus. Duis in tortor sit amet purus ornare placerat. Mauris vitae enim at diam dapibus vulputate. Sed ut gravida purus, ut lobortis dolor. Nulla molestie ex a quam semper, nec semper urna vulputate. Pellentesque vehicula dapibus nisi, eget fermentum purus commodo nec. Phasellus elementum, justo at pharetra rutrum, lectus arcu aliquam risus, aliquet tristique purus libero ac est.',
-  price: 2900
-};
 
 function App() {
   const [products, setProducts] = useState([])
