@@ -3,7 +3,6 @@ import { vi } from 'vitest'
 import { cleanup, render, screen, fireEvent, waitForElementToBeRemoved } from '@testing-library/react'
 import App from './App'
 
-
 vi.mock('fetch')
 
 const mockedImplementation = () => Promise.resolve({

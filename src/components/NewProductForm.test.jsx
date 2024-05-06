@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import NewProductForm from './NewProductForm'
 
 describe('NewProductForm', () => {
@@ -87,5 +88,28 @@ describe('NewProductForm', () => {
       fireEvent.click(screen.getByText('Outside'))
       expect(callback).toHaveBeenCalled()
     })
+  })
+
+  it('Submits form data when clicking Create button', async () => {
+    vi.mock('fetch')
+
+    const mockedImplementation = () => Promise.resolve({
+      json() {
+        return { products: [] }
+      }
+    })
+
+    global.fetch = vi.fn(mockedImplementation)
+
+    userEvent.setup()
+    render(<NewProductForm />)
+    const nameInput = screen.getByTestId('name-input')
+
+    const descInput = screen.getByTestId('description-input')
+    const priceInput = screen.getByTestId('price-input')
+
+    await userEvent.type(nameInput, "Produto")
+    await userEvent.type(descInput, "Description")
+    await userEvent.type(priceInput, "1234")
   })
 })
